@@ -31,6 +31,17 @@ ExternalProject_Add(
         INSTALL_COMMAND cmake -E echo "Skipping install step."
 
         CMAKE_CACHE_ARGS
+        #Added cross compile support
+        CMAKE_ARGS -DSLIC3R_BUILD_TESTS=OFF 
+                -DCMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS}
+                -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
+                -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
+                -DCMAKE_FIND_ROOT_PATH=${CMAKE_FIND_ROOT_PATH}
+                -DCMAKE_LIBRARY_ARCHITECTURE=${CMAKE_LIBRARY_ARCHITECTURE}
+                -DCMAKE_C_FLAGS=${CMAKE_C_FLAGS}
+                -DCMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS}
+                -DCMAKE_C_LINK_FLAGS=${CMAKE_C_LINK_FLAGS}
+                -DCMAKE_CXX_LINK_FLAGS=${MAKE_CXX_LINK_FLAGS}	        
         SOURCE_SUBDIR src
         BUILD_COMMAND ${CMAKE_COMMAND} --build <BINARY_DIR> --config Release
 )
